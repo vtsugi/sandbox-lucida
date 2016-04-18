@@ -82,36 +82,19 @@
 <div class="main_bg">
 <div class="wrap">
 <div class="main">
-	 	 <div class="contact">
-			 	<div class="erro hide alert alert-danger">
-		 			Erro ao enviar o seu pedido :( <br>
-					Tente novamente mais tarde
-			 	</div>
-					<div class="contact_info">
-						<h2>Checkout</h2>
-      				</div>
-				  <div class="contact-form">
-			 	 	    <form action="index.html" method="get" id="frm-checkout">
-					    	<div>
-						    	<span><label>Name</label></span>
-						    	<span><input name="userName" type="text" class="textbox"></span>
-						    </div>
-						    <div>
-						    	<span><label>E-mail</label></span>
-						    	<span><input name="userEmail" type="text" class="textbox"></span>
-						    </div>
-						    <div>
-						    	<span><label>Endereço</label></span>
-						    	<span><input name="userAdress" type="text" class="textbox"></span>
-						    </div>
-						   <div>
-						   		<span><input type="submit" class="" value="Submit us"></span>
-						  </div>
-					    </form>
-				    </div>
-  				<div class="clear"></div>
-			  </div>
-		</div>
+
+	<div class="contact_info alert alert-success">
+		<br>
+		<h2 class="f-large">Compra realizada com sucesso!</h2>
+		<br>
+		<p class="f-medium">
+			Seu número de pedido é <strong class="num-pedido">ABC12345</strong>
+		</p>
+		<br>
+	</div>
+	<!-- isso é uma gambiarra -->
+	<br><br><br><br><br><br><br>
+	<!-- fimd a gambiarra -->
 </div>
 </div>
 <!-- start footer -->
@@ -181,9 +164,6 @@
 <div class="footer_bg1">
 <div class="wrap">
 	<div class="footer">
-		<!-- scroll_top_btn -->
-		 <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
-		<!--end scroll_top_btn -->
 		<div class="copy">
 			<p class="link">&copy;  All rights reserved</p>
 		</div>
@@ -196,40 +176,35 @@
 <script type="text/javascript" src="js/move-top.js"></script>
 <script type="text/javascript" src="js/easing.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
 
-		var defaults = {
-			containerID: 'toTop', // fading element id
-			containerHoverID: 'toTopHover', // fading element hover id
-			scrollSpeed: 1200,
-			easingType: 'linear'
-		};
+function randomString(length) {
+	var text = '';
+	var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+	for( var i=0; i < length; i++ ) {
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
 
-		$().UItoTop({ easingType: 'easeOutQuart' });
+	return text;
+}
 
-	});
-</script>
-<script type="text/javascript">
+function randomNumber() {
+	return parseInt(Math.random().toString().substring(2, 7), 10)
+}
+
+function makeTicket() {
+	return randomString(5) + randomNumber()
+}
+
 	$(document).ready(function($) {
+
 		$(".scroll").click(function(event){
 			event.preventDefault();
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 		});
+		$('.num-pedido').html()
+		$('.num-pedido').html(makeTicket())
 
-		$('#frm-checkout').on('submit', function(e) {
-			e.preventDefault();
-			//SIMULA ERRO RANDOMICO
-			var random = !!(Math.round(Math.random() * 1000) % 2);
-			var href   = document.location.href;
-			console.log(random);
-			if (random) {
-				$('.erro').show('slow');
-			}
-			else {
-				document.location.href = href.replace('/checkout.html', '/purchase.html');
-			}
-		});
 	});
 </script>
 </body>
